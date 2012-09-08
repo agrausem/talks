@@ -1,0 +1,199 @@
+<!doctype html>  
+<html lang="fr">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>REST in SPORE - Pycon FR 2012</title>
+
+		<meta name="description" content="Rest in SPORE presentation at Pycon FR 2012">
+		<meta name="author" content="Arnaud Grausem">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link rel="stylesheet" href="reveal.js/css/main.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+		<script>
+			// If the query includes 'print-pdf' we'll use the PDF print sheet
+			document.write( '<link rel="stylesheet"
+                        href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-markdown>
+                                    # REST in SPORE
+
+                                    ### PyconFR 2012 - Paris
+				</section>
+
+                                <section>
+                                    <h2>SPORE</h2>
+
+                                    <h3><a href="https://github.com/SPORE/specifications">Specification to a POrtable Rest Environment</a></h3>
+
+                                    <p class="fragment">Description de API Web REST</p>
+                                    <p class="fragment">Format texte simple et lisible : JSON</p>
+                                    <p class="fragment">Versionnable</p>
+                                </section>
+
+                                <section>
+                                <h2>Pourquoi ?</h2>
+                                </section>
+                                <section>
+                                <h3>Constatations</h3>
+                                <img class="fragment" src="img/map.jpg" width=690" height="540"/>
+                                </section>
+                                <section>
+                                <h3>Conséquences</h3>
+                                <p class="fragment">Développement de clients dans tous les sens</p>
+                                <p class="fragment">Implémentation systématique d'une couche bas niveau comprenant la gestion :
+                                <ul>
+                                    <li class="fragment">des requêtes et des réponses HTTP</li>
+                                    <li class="fragment">de l'authentification et des autorisations</li>
+                                    <li class="fragment">des formats de réception des données</li>
+                                </ul>
+                                </section>
+                                <section>
+                                <h3>Et pourtant... pour quel objectif ?</h3>
+                                <p class="fragment">Envoyer des données</p>
+                                <p class="fragment">Traiter des données receptionnées</p>
+                                <br/>
+                                <h4 class="fragment">Nous devons nous affranchir de la façon d'envoyer et de recevoir les données !</h4>
+                                </section>
+                                <section>    
+                                <h3>One specification to rule them all</h3>
+                                <img src="img/ring.jpg">
+                                </section>
+                                <section>
+                                <h3>But</h3>
+                                <ul class="fragment">Parvenir à une implémentation qui va permettre de :
+                                  <li class="fragment">nous concentrer sur la logique de notre client</li>
+                                  <li class="fragment">disposer d'une API cliente simple, compréhensible et commune pour tous les services Web</li>
+                                  <li class="fragment">gagner du temps</li>
+                                </ul>
+                                </section>
+                                <section>
+                                    <h2>Qui ?</h2>       
+                                </section>
+                                <section>
+                                <h2>La spécification</h2>
+                                <p class="fragment">Un fichier JSON pour la description</p>
+                                <p class="fragment">Une API construisant un client à partir de cette description</p>
+                                <p class="fragment">Des middlewares pour modifier à la volée requêtes et réponses</p>
+                                </section>
+                                <section>
+                                <h3>Décrire un service Web - Généralités</h3>
+                                <pre><code>
+{
+    "base_url" : "http://api.twitter.com/1",
+    "version" : "0.2",   
+    "formats" : [
+      "json",
+      "rss",
+      "xml",
+      "atom"
+    ],
+    "name" : "Twitter",
+    "authority" : "GITHUB:franckcuny",
+    "meta" : {
+      "documentation" : "http://dev.twitter.com/"
+    },
+    "methods" : {
+       ...
+    },
+}
+                                </code></pre>
+                                </section>
+                                <section>
+                                    <h3>Décrire un service Web - Les méthodes</h3>
+                                    <pre><code>
+...,
+"methods": {
+    "retweeted_by_me" : {
+        "required_params" : [
+            "format"
+        ],
+        "optional_params" : [
+            "since_id",
+            "max_id",
+            "count",
+            "page",
+            "trim_user",
+            "include_entities"
+        ],
+        "path" : "/statuses/retweeted_by_me.:format",
+        "method" : "GET",
+        "authentication" : true
+    },
+    ...
+},
+                                    </code></pre>
+                                </section>
+                                <section>
+                                    <h3>Implémentation du client</h3>
+                                </section>
+                                 
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Presentation progress bar -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'reveal.js/lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js/lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'reveal.js/plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>
