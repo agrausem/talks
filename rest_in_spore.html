@@ -96,7 +96,7 @@
                                 <section>
                                 <h2>La spécification</h2>
                                 <p class="fragment">Un fichier JSON pour la description</p>
-                                <p class="fragment">Une API construisant un client à partir de cette description</p>
+                                <p class="fragment">Une implémentation construisant un client à partir de cette description</p>
                                 <p class="fragment">Des middlewares pour modifier à la volée requêtes et réponses</p>
                                 </section>
                                 <section>
@@ -148,9 +148,134 @@
                                     </code></pre>
                                 </section>
                                 <section>
-                                    <h3>Implémentation du client</h3>
+                                    <h3>Implémenter un client</h3>
+                                    <p class="fragment">Fonction ou méthode construisant
+                                    le client Spore à partir d'une
+                                    spécification</p>
+                                    <p class="fragment">Méthode permettant
+                                    d'activer ou désactiver des middlewares en
+                                    cours d'exécution</p>
+                                    <pre class="fragment"><code>
+import spyre
+
+client = spyre.new_from_spec('redmine.json')
+client.enable('auth.Basic', username="toto", password="tata")
+                                    </pre></code>
                                 </section>
-                                 
+                                <section>
+                                    <h4>Les méthodes</h4>
+                                    <p>Chaque méthode définie dans la description
+                                    devient une méthode du client qui :<p>
+                                    <ul>
+                                        <li class="fragment">a des arguments
+                                        obligatoires</li>
+                                        <li class="fragment">peut avoir des
+                                        arguments optionnels</li>
+                                        <li class="fragment">construit
+                                        l'environnement de la requête à
+                                        envoyer</li>
+                                        <li class="fragment">prend en charge
+                                        les middlewares activés</li>
+                                        <li class="fragment">envoie la requête
+                                        selon le path défini</li>
+                                        <li class="fragment">contrôle les codes
+                                        de retour de la réponse</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h4>Les méthodes</h4>
+                                    <code><pre>
+>>> import spyre
+
+>>> client = spyre.new_from_spec('redmine.json',
+                base_url="https://my-redmine.mydomain.org")
+>>> client.enable('auth.Basic', username="toto", password="tata")
+
+>>> response = client.get_user(id='3', format='json')
+>>> print reponse.base
+http://my-redmine.mydomain.org:443/users/3.json
+>>> print response.status
+200
+>>> my_user = response.content
+>>> print my_user
+'{"user":{"lastname":"Toto","login":"toto","firstname":"Toto",
+"mail":"toto@gmail.com","created_on":"2012/01/05 16:47:32 +0100",
+"last_login_on":"2012/09/06 18:27:26 +0200","id":3}}'
+                                    </code></pre>
+                                </section>
+                                <section>
+                                    <h4>L'environnement de la requête</h4>
+                                    <p class="fragment">une structure de
+                                    données</p>
+                                    <p class="fragment">certaines clés sont
+                                    définies par WSGI, Rack, PSGI et
+                                    JSGI et sont requises par la spécification SPORE</p> 
+                                    <p class="fragment">d'autres sont définies
+                                    par la spécification elle-même</p>
+                                    <p class="fragment">modifiable durant
+                                    l'éxecution par les middlewares</p>
+                                    <p class="fragment">utilisée pour
+                                    construire la requête finale à envoyer</p>
+                                </section>
+                                <section>
+                                    <h4>L'environnment de la requête</h4>
+                                    <p>L'environnement de la requête pour
+                                    l'exemple précédent</p>
+                                    <code><pre>
+{
+    'spore.headers': [('Authorization', 'Basic dG90bzp0YXRh')],
+    'HTTP_USER_AGENT': 'spyre', 
+    'SERVER_NAME': 'my-redmine.mydomain.org',
+    'spore.userinfo': None, 
+    'spore.authentication': True, 
+    'SCRIPT_NAME': ['', 'redmine'],
+    'spore.url_scheme': 'https',
+    'spore.formats': None,
+    'spore.payload': 'payload', 
+    'REQUEST_METHOD': u'GET',
+    'spore.expected_status': [],
+    'PATH_INFO': u'/users/:id.:format',
+    'SERVER_PORT': 443,
+    'spore.errors': '',
+    'QUERY_STRING': '',
+    'spore.params': ['id', '3', 'format', 'json'],
+    'REQUEST_URI': ''
+}
+                                    </code></pre>
+                                </section>
+                                <section>
+                                    <h4>Les middlewares</h4>
+                                        <p class="fragment">modifier
+                                        l'environnement de la requête avant
+                                        envoi pour agir sur sa construction</p>
+                                        <p class="fragment">activer un
+                                        callback qui sera appliqué sur la
+                                        réponse</p>
+                                        <p class="fragment">retourner
+                                        directement une réponse sans envoyer la
+                                        requête</p>
+                                </section>
+                                <section>
+                                <h4>Les middlewares</h4>
+                                <p>Activation d'un middleware de "formattage"
+                                du contenu de la réponse</p>
+                                <pre><code>
+>>> import spyre
+
+>>> client = spyre.new_from_spec('redmine.json',
+                base_url="https://my-redmine.mydomain.org")
+>>> client.enable('auth.Basic', username="toto", password="tata")
+>>> client.enable('format.Json')
+
+>>> response = client.get_user(id='3', format='json')
+>>> my_user = response.content
+>>> print type(my_user)
+dict
+>>> print my_user['user']['login']
+toto
+
+                                </pre></code>
+                                </section>
 				
 			</div>
 
