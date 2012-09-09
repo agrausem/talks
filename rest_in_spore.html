@@ -104,50 +104,53 @@
                                 <section>
                                 <h3>Décrire un service Web - Généralités</h3>
                                 <pre><code>
+
 {
-    "base_url" : "http://api.twitter.com/1",
-    "version" : "0.2",   
-    "formats" : [
+   "name" : "Redmine API",
+   "authority" : "GITHUB:Keen-github",
+   "base_url": "http://redmine.domain.fr",
+   "formats" : [
       "json",
-      "rss",
-      "xml",
-      "atom"
-    ],
-    "name" : "Twitter",
-    "authority" : "GITHUB:franckcuny",
-    "meta" : {
-      "documentation" : "http://dev.twitter.com/"
-    },
-    "methods" : {
+      "xml"
+   ],
+   "version" : "0.1",
+   "meta" : {
+      "documentation" : "http://www.redmine.org/projects/redmine/wiki/Rest_api",
+      "authors" : "LogicEditor.com: Valeriy Skurikhin"
+   }
+   "methods" : {
        ...
-    },
+   },
 }
                                 </code></pre>
                                 </section>
                                 <section>
                                     <h3>Décrire un service Web - Les méthodes</h3>
                                     <pre><code>
-...,
 "methods": {
-    "retweeted_by_me" : {
-        "required_params" : [
+     "get_user" : {
+         "path" : "/users/:id.:format", 
+         "required_params" : [
+            "id",
             "format"
-        ],
-        "optional_params" : [
-            "since_id",
-            "max_id",
-            "count",
-            "page",
-            "trim_user",
-            "include_entities"
-        ],
-        "path" : "/statuses/retweeted_by_me.:format",
-        "method" : "GET",
-        "authentication" : true
+         ],
+         "method" : "GET",
+         "authentication" : true
     },
+    "list_users" : {
+         "path" : "/users.:format", 
+         "required_params" : [
+            "format"
+         ],
+         "optional_params" : [
+            "limit",
+            "offset"
+         ],
+         "method" : "GET",
+         "authentication" : true
+      },
     ...
-},
-                                    </code></pre>
+},</code></pre>
                                 </section>
                                 <section>
                                     <h3>Implémenter un client</h3>
@@ -208,10 +211,11 @@ http://my-redmine.mydomain.org:443/users/3.json
                                 <section>
                                     <h4>L'environnement de la requête</h4>
                                     <p class="fragment">une structure de
-                                    données</p>
-                                    <p class="fragment">certaines clés sont
-                                    définies par WSGI, Rack, PSGI et
-                                    JSGI et sont requises par la spécification SPORE</p> 
+                                    données (e.g. dictionnaire)</p>
+                                    <p class="fragment">certaines clés, 
+                                    adoptées par WSGI (PEP 333),
+                                    Rack, PSGI et JSGI, sont requises par la
+                                    spécification SPORE</p> 
                                     <p class="fragment">d'autres sont définies
                                     par la spécification elle-même</p>
                                     <p class="fragment">modifiable durant
