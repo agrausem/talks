@@ -61,9 +61,16 @@
                                 <section>
                                 <h2>Pourquoi ?</h2>
                                 </section>
-                                <section>
+                                <section data-state="image-blocker">
                                 <h3>Constatations</h3>
-                                <img class="fragment" src="img/map.jpg" width=690" height="540"/>
+                                <img id="map0" src="img/map.jpg" width="700"
+                                height="550"/>
+                                <img id="map1" class="fragment"
+                                src="img/map1.jpg" width=700" height="550"/>
+                                <img id="map2" class="fragment"
+                                src="img/map2.jpg" width=700" height="550"/>
+                                <img id="map3" class="fragment"
+                                src="img/map3.jpg" width=700" height="550"/>
                                 </section>
                                 <section>
                                 <h3>Conséquences</h3>
@@ -96,11 +103,14 @@
                                 </section>
                                 <section>
                                     <h2>Qui ?</h2>
-                                    <img class="fragment" src="img/mordor.jpg">
+                                    <p class="fragment">Linkfluence -
+                                    http://fr.linkfluence.net</p>
+                                    <img class="fragment" src="img/mordor.jpg"
+                                    width="650" height="500">
                                 </section>
                                 <section>
                                     <h3>Une petite communauté qui grandit vite</h3>
-                                    <p class="fragment">une idée a vu le jour en 2010</p>
+                                    <p class="fragment">Une idée qui a vu le jour en 2010</p>
                                     <p class="fragment">présentée à OSDC.fr la
                                     même année</p>
                                     <p class="fragment">les pères de la spécification:
@@ -121,7 +131,7 @@
                                 </section>
                                 <section>
                                 <h3>Décrire un service Web - Généralités</h3>
-                                <pre><code>
+                                <pre><code class="javascript">
 
 {
    "name" : "Redmine API",
@@ -144,7 +154,7 @@
                                 </section>
                                 <section>
                                     <h3>Décrire un service Web - Les méthodes</h3>
-                                    <pre><code>
+                                    <pre><code class="javascript">
 "methods": {
      "get_user" : {
          "path" : "/users/:id.:format", 
@@ -178,7 +188,7 @@
                                     <p class="fragment">Méthode permettant
                                     d'activer ou désactiver des middlewares en
                                     cours d'exécution</p>
-                                    <pre class="fragment"><code>
+                                    <pre class="fragment"><code class="python">
 import spyre
 
 client = spyre.new_from_spec('redmine.json')
@@ -207,7 +217,7 @@ client.enable('auth.Basic', username="toto", password="tata")
                                 </section>
                                 <section>
                                     <h4>Les méthodes</h4>
-                                    <code><pre>
+                                    <pre><code>
 >>> import spyre
 
 >>> client = spyre.new_from_spec('redmine.json',
@@ -245,7 +255,7 @@ http://my-redmine.mydomain.org:443/users/3.json
                                     <h4>L'environnment de la requête</h4>
                                     <p>L'environnement de la requête pour
                                     l'exemple précédent</p>
-                                    <code><pre>
+                                    <pre><code>
 {
     'spore.headers': [('Authorization', 'Basic dG90bzp0YXRh')],
     'HTTP_USER_AGENT': 'spyre', 
@@ -305,13 +315,24 @@ toto
                                 <p>Des clients ont été implémentés et sont
                                 fonctionnels en:
                                 <ul>
-                                    <li class="fragment">Perl</li>
-                                    <li class="fragment">Lua</li>
-                                    <li class="fragment">Ruby</li>
-                                    <li class="fragment">Clojure</li>
-                                    <li class="fragment">jQuery</li>
-                                    <li class="fragment">node.js</li>
-                                    <li class="fragment">et même Java !</li>
+                                    <li class="fragment"><a
+                                        href="https://github.com/franckcuny/net-http-spore">Perl</a>
+                                        - Franck Cuny</li>
+                                        <li class="fragment"><a href="">Lua</a>
+                                        - Franck Perrad</li>
+                                    <li class="fragment"><a
+                                        href="https://github.com/sukria/Ruby-Spore">Ruby</a>
+                                    - Alexis Sukrieh</li>
+                                    <li class="fragment"><a
+                                        href="https://github.com/fperrad/lua-Spore/">Clojure</a> - Niel Grünwald</li>
+                                    <li class="fragment"><a
+                                        href="https://github.com/nikopol/jquery-spore">jQuery</a>
+                                    - Nikopol
+                                    <li class="fragment"><a
+                                        href="https://github.com/francois2metz/node-spore">node.js</a>
+                                - François de Metz</li>
+                                <li class="fragment">et même <a
+                                    href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
                                 </ul>
                                 </p>
                                 </section>
@@ -322,12 +343,14 @@ toto
                                 <section>
                                 <h3>Spyre</h3>
                                 <p class="fragment">en cours de développement</p>
+                                <p class="fragment">par Damien Leroux, Franck
+                                Cuny et moi-même</p>
                                 <p class="fragment">dépôt officiel : https://github.com/blob/sypre<p>
                                 <p class="fragment">mon fork: https://github.com/agrausem/spyre</p>
                                 </section>
                                 <section>
                                 <h3>Fonctionnalités</h3>
-                                <p class="fragment">requêtes GET et DELETE</p>
+                                <p class="fragment">méthodes GET et DELETE</p>
                                 <p class="fragment">authentification Basic et via Header</p>
                                 <p class="fragment">format JSON</p>
                                 </section>
@@ -337,12 +360,19 @@ toto
                                 etc)</p>
                                 <p class="fragment">gestion du payload pour
                                 POST et PUT</p>
+                                <p class="fragment">autres verbes HTTP (e.g
+                                PATCH, etc...)
                                 <p class="fragment">oauth</p>
                                 <p class="fragment">ménage !</p>
                                 </section>
                                 <section>
                                 <h3>Demain ?</h3>
                                 <img class="fragment" src="img/gollum.jpg"/>
+                                </section>
+                                <section>
+                                <h3>Merci !</h3>
+                                <img class="fragment" src="img/sauron.jpg"
+                                width="650" height="500">
                                 </section>
 			</div>
 
@@ -384,6 +414,14 @@ toto
 					{ src: 'reveal.js/plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
 				]
 			});
+
+                        Reveal.addEventListener('fragmentshown', function(event) {
+                            var id = parseInt(event.fragment.id[3]) - 1;
+                            if (id < 4) {
+                                to_hide = document.getElementById("map" + id)
+                                to_hide.style.display = "none";
+                            }
+                        })
 			
 		</script>
 
