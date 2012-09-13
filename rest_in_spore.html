@@ -53,10 +53,11 @@
 
                                     <h3><a href="https://github.com/SPORE/specifications">Specification to a POrtable Rest Environment</a></h3>
 
-                                    <p class="fragment">Description d'API Web REST</p>
-                                    <p class="fragment">Document texte simple et lisible : JSON</p>
-                                    <p class="fragment">Utilisable par des implémentations spécifiques à chaque langage</p>
-                                    <p class="fragment">Génération d'objets
+                                    <p class="">Décrire des API Web REST</p>
+                                    <p class="">Document texte simple et lisible : JSON</p>
+                                    <p class="">Implémentations spécifiques à
+                                    chaque langage</p>
+                                    <p class="">But final ? Générer des objets
                                     clients de haut niveau</p>
                                 </section>
 
@@ -76,18 +77,18 @@
                                 </section>
                                 <section>
                                 <h3>Conséquences</h3>
-                                <p class="fragment">Développement de clients dans tous les sens</p>
-                                <p class="fragment">Implémentation systématique d'une couche bas niveau comprenant la gestion :
+                                <p class="">Développement de clients dans tous les sens</p>
+                                <p class="">Implémentation systématique d'une couche bas niveau comprenant la gestion :
                                 <ul>
-                                    <li class="fragment">des requêtes et des réponses HTTP</li>
-                                    <li class="fragment">de l'authentification et des autorisations</li>
-                                    <li class="fragment">des formats de réception des données</li>
+                                    <li class="">des requêtes et des réponses HTTP</li>
+                                    <li class="">de l'authentification et des autorisations</li>
+                                    <li class="">des formats de réception des données</li>
                                 </ul>
                                 </section>
                                 <section>
                                 <h3>Et pourtant... pour quel objectif ?</h3>
-                                <p class="fragment">Envoyer des données</p>
-                                <p class="fragment">Traiter des données receptionnées</p>
+                                <p class="">Envoyer des données</p>
+                                <p class="">Traiter des données receptionnées</p>
                                 <br/>
                                 <h4 class="fragment">Nous devons nous affranchir de la façon d'envoyer et de recevoir les données !</h4>
                                 </section>
@@ -97,10 +98,12 @@
                                 </section>
                                 <section>
                                 <h3>But</h3>
-                                <ul class="fragment">Parvenir à une implémentation qui va permettre de :
-                                  <li class="fragment">nous concentrer sur la logique de notre client</li>
-                                  <li class="fragment">disposer d'une API cliente simple, compréhensible et commune pour tous les services Web</li>
-                                  <li class="fragment">gagner du temps</li>
+                                  <p class="">disposer d'une API cliente simple, compréhensible et commune pour tous les services Web</p>
+                                  <p class="">nous concentrer sur la logique de
+                                  notre client</p>
+                                  <p class="">gagner du temps</p>
+                                  <img class="fragment"
+                                  src='img/karmeliet.jpg' height="400"/>
                                 </ul>
                                 </section>
                                 <section>
@@ -110,25 +113,22 @@
                                     <img src="img/mordor.jpg" width="650" height="500">
                                 </section>
                                 <section>
-                                    <h3>Une petite communauté qui grandit vite</h3>
-                                    <p class="fragment">Une idée qui a vu le jour en 2010</p>
-                                    <p class="fragment">présentée à OSDC.fr la
+                                    <h2>Qui ?</h2>
+                                    <p class="">réflexion datant 2010</p>
+                                    <p class="">présentée à OSDC.fr la
                                     même année</p>
-                                    <p class="fragment">les pères de la spécification:
-                                    <ul class="fragment">
-                                        <li>Franck Cuny</li>
-                                        <li>Nils Grünwald</li>
-                                    </ul></p>
-                                    <p class="fragment">des clients dans plusieurs langages ont
-                                    rapidement vu le jour</p>
-                                    <p class="fragment">un prếcheur qui écume
-                                    les routes: Camille Maussang</p>
+                                    <p class="">les papas:  Franck Cuny, Nils
+                                    Grünwald</p>
+                                    <p class="">un prêcheur: Camille
+                                    Maussang</p>
                                 </section>
                                 <section>
                                 <h2>La spécification</h2>
-                                <p class="fragment">Un fichier JSON pour la description</p>
-                                <p class="fragment">Une implémentation construisant un client à partir de cette description</p>
-                                <p class="fragment">Des middlewares pour modifier à la volée requêtes et réponses</p>
+                                <p class="">comment décrire un service
+                                REST</p>
+                                <p class="">comment implémenter un
+                                client</p>
+                                <p class=""></p>comment implémenter des middlewares
                                 </section>
                                 <section>
                                 <h3>Décrire un service Web - Généralités</h3>
@@ -183,11 +183,10 @@
                                 </section>
                                 <section>
                                     <h3>Implémenter un client</h3>
-                                    <p class="fragment">Fonction ou méthode construisant
-                                    le client Spore à partir d'une
-                                    spécification</p>
-                                    <p class="fragment">Méthode permettant
-                                    d'activer ou désactiver des middlewares en
+                                    <p class="">construire
+                                    le client Spore à partir d'une spécification</p>
+                                    <p class="">pouvoir
+                                    activer ou désactiver des middlewares en
                                     cours d'exécution</p>
                                     <pre class="fragment"><code class="python">
 import spyre
@@ -201,18 +200,18 @@ client.enable('auth.Basic', username="toto", password="tata")
                                     <p>Chaque méthode définie dans la description
                                     devient une méthode du client qui :<p>
                                     <ul>
-                                        <li class="fragment">a des arguments
+                                        <li class="">a des arguments
                                         obligatoires</li>
-                                        <li class="fragment">peut avoir des
+                                        <li class="">peut avoir des
                                         arguments optionnels</li>
-                                        <li class="fragment">construit
+                                        <li class="">construit
                                         l'environnement de la requête à
                                         envoyer</li>
-                                        <li class="fragment">prend en charge
+                                        <li class="">prend en charge
                                         les middlewares activés</li>
-                                        <li class="fragment">envoie la requête
+                                        <li class="">envoie la requête
                                         selon le path défini</li>
-                                        <li class="fragment">contrôle les codes
+                                        <li class="">contrôle les codes
                                         de retour de la réponse</li>
                                     </ul>
                                 </section>
@@ -239,17 +238,17 @@ http://my-redmine.mydomain.org:443/users/3.json
                                 </section>
                                 <section>
                                     <h4>L'environnement de la requête</h4>
-                                    <p class="fragment">une structure de
+                                    <p class="">une structure de
                                     données (e.g. dictionnaire)</p>
-                                    <p class="fragment">certaines clés, 
+                                    <p class="">certaines clés, 
                                     adoptées par WSGI (PEP 333),
                                     Rack, PSGI et JSGI, sont requises par la
                                     spécification SPORE</p> 
-                                    <p class="fragment">d'autres sont définies
+                                    <p class="">d'autres sont définies
                                     par la spécification elle-même</p>
-                                    <p class="fragment">modifiable durant
+                                    <p class="">modifiable durant
                                     l'éxecution par les middlewares</p>
-                                    <p class="fragment">utilisée pour
+                                    <p class="">utilisée pour
                                     construire la requête finale à envoyer</p>
                                 </section>
                                 <section>
@@ -280,19 +279,20 @@ http://my-redmine.mydomain.org:443/users/3.json
                                 </section>
                                 <section>
                                     <h4>Les middlewares</h4>
-                                        <p class="fragment">modifier
+                                        <p class="">modifier
                                         l'environnement de la requête avant
                                         envoi pour agir sur sa construction</p>
-                                        <p class="fragment">activer un
+                                        <p class="">activer un
                                         callback qui sera appliqué sur la
                                         réponse</p>
-                                        <p class="fragment">retourner
+                                        <p class="">retourner
                                         directement une réponse sans envoyer la
                                         requête</p>
                                 </section>
                                 <section>
                                 <h4>Les middlewares</h4>
-                                <p>Activation d'un middleware de "formattage"
+                                <p>Activation d'un middleware de
+                                désérialisation
                                 du contenu de la réponse</p>
                                 <pre><code>
 >>> import spyre
@@ -319,56 +319,56 @@ toto
                                     <li class="fragment"><a
                                         href="https://github.com/franckcuny/net-http-spore">Perl</a>
                                         - Franck Cuny</li>
-                                        <li class="fragment"><a href="">Lua</a>
+                                        <li class=""><a href="">Lua</a>
                                         - Franck Perrad</li>
-                                    <li class="fragment"><a
+                                    <li class=""><a
                                         href="https://github.com/sukria/Ruby-Spore">Ruby</a>
                                     - Alexis Sukrieh</li>
-                                    <li class="fragment"><a
+                                    <li class=""><a
                                         href="https://github.com/fperrad/lua-Spore/">Clojure</a> - Niel Grünwald</li>
-                                    <li class="fragment"><a
+                                    <li class=""><a
                                         href="https://github.com/nikopol/jquery-spore">jQuery</a>
                                     - Nikopol
-                                    <li class="fragment"><a
+                                    <li class=""><a
                                         href="https://github.com/francois2metz/node-spore">node.js</a>
                                 - François de Metz</li>
-                                <li class="fragment">et même <a
+                                <li class="">et même <a
                                     href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
                                 </ul>
                                 </p>
                                 </section>
                                 <section>
                                 <h3>Et Python ?</h3>
-                                <img class="fragment" src="img/meet_the_ring.jpg"/>
+                                <img class="" src="img/meet_the_ring.jpg"/>
                                 </section>
                                 <section>
                                 <h3>Spyre</h3>
-                                <p class="fragment">en cours de développement</p>
-                                <p class="fragment">par Damien Leroux, Franck
+                                <p class="">en cours de développement</p>
+                                <p class="">par Damien Leroux, Franck
                                 Cuny et moi-même</p>
-                                <p class="fragment">dépôt officiel : https://github.com/blob/sypre<p>
-                                <p class="fragment">mon fork: https://github.com/agrausem/spyre</p>
+                                <p class="">dépôt officiel : https://github.com/blob/sypre<p>
+                                <p class="">mon fork: https://github.com/agrausem/spyre</p>
                                 </section>
                                 <section>
                                 <h3>Fonctionnalités</h3>
-                                <p class="fragment">méthodes GET et DELETE</p>
-                                <p class="fragment">authentification Basic et via Header</p>
-                                <p class="fragment">format JSON</p>
+                                <p class="">méthodes GET et DELETE</p>
+                                <p class="">authentification Basic et via Header</p>
+                                <p class="">format JSON</p>
                                 </section>
                                 <section>
                                 <h3>Reste à faire</h3>
-                                <p class="fragment">autres formats (e.g. XML,
+                                <p class="">autres formats (e.g. XML,
                                 etc)</p>
-                                <p class="fragment">gestion du payload pour
+                                <p class="">gestion du payload pour
                                 POST et PUT</p>
-                                <p class="fragment">autres verbes HTTP (e.g
+                                <p class="">autres verbes HTTP (e.g
                                 PATCH, etc...)
-                                <p class="fragment">oauth</p>
-                                <p class="fragment">ménage !</p>
+                                <p class="">oauth</p>
+                                <p class="">ménage !</p>
                                 </section>
                                 <section>
                                 <h3>Demain ?</h3>
-                                <img class="fragment" src="img/gollum.jpg"/>
+                                <img class="" src="img/gollum.jpg"/>
                                 </section>
                                 <section>
                                 <h3>Merci !</h3>
