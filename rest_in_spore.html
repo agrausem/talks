@@ -40,13 +40,104 @@
 			
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+
 				<section data-markdown>
                                     <h1>REST in SPORE</h1>
 
                                     <h3>PyconFR 2012 - Paris</h3>
-                                    <p><i><small>- <a href="http://github.com/agrausem">Arnaud Grausem</a> / <a href="http://twitter.com/agrausem">@agrausem</a></small></i>
-</p>
 				</section>
+
+                                <section>
+                                <h2>Arnaud Grausem</h2>
+                                <p>Université de Strasbourg / Direction
+                                Informatique</p>
+                                <p>Responsable des développements<p>
+                                <p><i><small>- <a
+                                href="http://github.com/agrausem">github.com/agrausem</a>
+                                / <a href="http://twitter.com/agrausem">@agrausem</a></small></i></a>
+                                </section>
+
+                                <section>
+                                <h2>État des lieux</h2>
+                                    <p>Système d'information hétérogéne</p>
+                                    <p>API lourdes Java</p>
+                                </section>
+                                <section>
+                                <h2>Faits d'arme</h2>
+                                    <p>Python, langage officiel</p>
+                                    <p>Web APIs REST</p>
+                                    <p>Clients</p>
+                                </section>
+                                <section>
+                                <h2>Problème</h2>
+                                    <p>répétitif</p>
+                                    <p>lassant</p>
+                                    <p>tout sauf sexy</p>                                
+                                </section>
+                                <section>
+                                <h2>Ça suffit !</h2>
+                                    <pre><code python>
+def _BuildUrl(self, url, path_elements=None, extra_params=None):
+    # Break url into consituent parts
+    (scheme, netloc, path, params, query, fragment) = urlparse.urlparse(url)
+
+    # Add any additional path elements to the path
+    if path_elements:
+        # Filter out the path elements that have a value of None
+        p = [i for i in path_elements if i]
+        if not path.endswith('/'):
+            path += '/'
+            path += '/'.join(p)
+
+    # Add any additional query parameters to the query string
+    if extra_params and len(extra_params) > 0:
+        extra_query = self._EncodeParameters(extra_params)
+        # Add it to the existing query
+        if query:
+            query += '&' + extra_query
+        else:
+            query = extra_query
+    # Return the rebuilt URL
+    return urlparse.urlunparse((scheme, netloc, path, params, query, fragment))
+                                    </code></pre>
+                                </section>
+
+                                <section>
+                                    <h2>Idée</h2>
+                                    <p>laisser la machine faire</p>
+                                    <p>comment ?</p>
+                                    <p>une librairie ?</p>
+                                    <p>chercher autre part ?</p>
+                                </section>
+
+                                <section>
+                                    <h2>Linkfluence</h2>
+                                    <p>http://fr.linkfluence.net</p>
+                                    <p>Franck Cuny, Nils Grünwald</p>
+                                    <img src="img/mordor.jpg" width="650" height="500">
+                                </section>
+
+                                <section>
+                                    <h3>Constat</h3>
+                                    <p class="">Implémentation systématique de la gestion :
+                                    <ul>
+                                        <li class="">des requêtes et des réponses HTTP</li>
+                                        <li class="">de l'authentification et des autorisations</li>
+                                        <li class="">des formats de réception des données</li>
+                                    </ul>
+                                </section>
+
+                                <section>
+                                    <h3>Et pourtant... pour quel objectif ?</h3>
+                                    <p class="">Envoyer des données</p>
+                                    <p class="">Traiter des données receptionnées</p>
+                                    <br/>
+                                </section>
+
+                                <section>    
+                                    <h3>One specification to rule them all</h3>
+                                    <img src="img/ring.jpg">
+                                </section>
 
                                 <section>
                                     <h2>SPORE</h2>
@@ -57,71 +148,84 @@
                                     <p class="">Document texte simple et lisible : JSON</p>
                                     <p class="">Implémentations spécifiques à
                                     chaque langage</p>
-                                    <p class="">But final ? Générer des objets
-                                    clients de haut niveau</p>
                                 </section>
 
                                 <section>
-                                <h2>Pourquoi ?</h2>
+                                   <h2>But</h2>
+                                     <p>API cliente simple</p>
+                                     <p>compréhensible</p>
+                                     <p>se concentrer sur la logique du client</p>
+                                     <p>gagner du temps</p>
+                                     <img class="fragment" src='img/karmeliet.jpg' height="380"/>
                                 </section>
-                                <section data-state="image-blocker">
-                                <h3>Constatations</h3>
-                                <img id="map0" src="img/map.jpg" width="700"
-                                height="550"/>
-                                <img id="map1" class="fragment"
-                                src="img/map1.jpg" width=700" height="550"/>
-                                <img id="map2" class="fragment"
-                                src="img/map2.jpg" width=700" height="550"/>
-                                <img id="map3" class="fragment"
-                                src="img/map3.jpg" width=700" height="550"/>
+
+                                <section>
+                                <h3>Ecosystème</h3>
+                                <p>communauté grandissante</p>
+                                <p>un prêcheur infatigable: Camille
+                                Maussang</p>
                                 </section>
                                 <section>
-                                <h3>Conséquences</h3>
-                                <p class="">Développement de clients dans tous les sens</p>
-                                <p class="">Implémentation systématique d'une couche bas niveau comprenant la gestion :
+                                <h3>Implémentations</h3>
+                                <p>Des clients ont été implémentés et sont
+                                fonctionnels en:</p>
                                 <ul>
-                                    <li class="">des requêtes et des réponses HTTP</li>
-                                    <li class="">de l'authentification et des autorisations</li>
-                                    <li class="">des formats de réception des données</li>
+                                    <li class=""><a
+                                        href="https://github.com/franckcuny/net-http-spore">Perl</a>
+                                        - Franck Cuny</li>
+                                        <li class=""><a href="">Lua</a>
+                                        - Franck Perrad</li>
+                                    <li class=""><a
+                                        href="https://github.com/sukria/Ruby-Spore">Ruby</a>
+                                    - Alexis Sukrieh</li>
+                                    <li class=""><a
+                                        href="https://github.com/fperrad/lua-Spore/">Clojure</a> - Niel Grünwald</li>
+                                    <li class=""><a
+                                        href="https://github.com/nikopol/jquery-spore">jQuery</a>
+                                    - Nikopol
+                                    <li class=""><a
+                                        href="https://github.com/francois2metz/node-spore">node.js</a>
+                                - François de Metz</li>
+                                    <li><a
+                                    href="https://github.com/bins/PHP-Spore">PHP</a>
+                                    - Bin SHU</li>
+                                <li class="">et même <a
+                                    href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
                                 </ul>
                                 </section>
+
+                                <section data-state="image-blocker">
+                                <h3>Descriptions</h3>
+                                <p>https://github.com/SPORE/api-description</p>
+                                <img id="map0" src="img/map.jpg" width="650"
+                                height="500"/>
+                                <img id="map1" class="fragment"
+                                src="img/map1.jpg" width=650" height="500"/>
+                                <img id="map2" class="fragment"
+                                src="img/map2.jpg" width=650" height="500"/>
+                                </section>
+
                                 <section>
-                                <h3>Et pourtant... pour quel objectif ?</h3>
-                                <p class="">Envoyer des données</p>
-                                <p class="">Traiter des données receptionnées</p>
-                                <br/>
-                                <h4 class="fragment">Nous devons nous affranchir de la façon d'envoyer et de recevoir les données !</h4>
+                                <h3>Acmeism</h3>
+                                <p>une description à jour</p>
+                                <p>tous les clients à jour</p>
+                                <p>pour tous les langages</p>
                                 </section>
-                                <section>    
-                                <h3>One specification to rule them all</h3>
-                                <img src="img/ring.jpg">
-                                </section>
+
                                 <section>
-                                <h3>But</h3>
-                                  <p class="">disposer d'une API cliente simple, compréhensible et commune pour tous les services Web</p>
-                                  <p class="">nous concentrer sur la logique de
-                                  notre client</p>
-                                  <p class="">gagner du temps</p>
-                                  <img class="fragment"
-                                  src='img/karmeliet.jpg' height="400"/>
-                                </ul>
+                                <h3>Et Python ?</h3>
+                                <img class="fragment" src="img/meet_the_ring.jpg"/>
                                 </section>
+
                                 <section>
-                                    <h2>Qui ?</h2>
-                                    <p>Linkfluence -
-                                    http://fr.linkfluence.net</p>
-                                    <img src="img/mordor.jpg" width="650" height="500">
+                                <h3>Spyre</h3>
+                                <p class="">en cours de développement</p>
+                                <p class="">par Damien Leroux, Franck
+                                Cuny et moi-même</p>
+                                <p class="">dépôt officiel : https://github.com/blob/sypre<p>
+                                <p class="">mon fork: https://github.com/agrausem/spyre</p>
                                 </section>
-                                <section>
-                                    <h2>Qui ?</h2>
-                                    <p class="">réflexion datant 2010</p>
-                                    <p class="">présentée à OSDC.fr la
-                                    même année</p>
-                                    <p class="">les papas:  Franck Cuny, Nils
-                                    Grünwald</p>
-                                    <p class="">un prêcheur: Camille
-                                    Maussang</p>
-                                </section>
+
                                 <section>
                                 <h2>La spécification</h2>
                                 <p class="">comment décrire un service
@@ -183,10 +287,11 @@
                                 </section>
                                 <section>
                                     <h3>Implémenter un client</h3>
-                                    <p class="">construire
-                                    le client Spore à partir d'une spécification</p>
-                                    <p class="">pouvoir
-                                    activer ou désactiver des middlewares en
+                                    <p class="">construction
+                                    d'un client Spore à partir d'une spécification</p>
+                                    <p class="">meta-programming</p>
+                                    <p class="">
+                                    activation / désactivation de middlewares en
                                     cours d'exécution</p>
                                     <pre class="fragment"><code class="python">
 import spyre
@@ -196,66 +301,60 @@ client.enable('auth.Basic', username="toto", password="tata")
                                     </pre></code>
                                 </section>
                                 <section>
-                                    <h4>Les méthodes</h4>
-                                    <p>Chaque méthode définie dans la description
-                                    devient une méthode du client qui :<p>
-                                    <ul>
-                                        <li class="">a des arguments
+                                    <h3>Appel de méthodes</h3>
+                                        <p>depuis l'objet client généré</p>
+                                        <p class="">des arguments
                                         obligatoires</li>
-                                        <li class="">peut avoir des
+                                        <p class="">des
                                         arguments optionnels</li>
-                                        <li class="">construit
-                                        l'environnement de la requête à
-                                        envoyer</li>
-                                        <li class="">prend en charge
-                                        les middlewares activés</li>
-                                        <li class="">envoie la requête
-                                        selon le path défini</li>
-                                        <li class="">contrôle les codes
-                                        de retour de la réponse</li>
-                                    </ul>
                                 </section>
                                 <section>
-                                    <h4>Les méthodes</h4>
-                                    <pre><code>
->>> import spyre
+                                   <h3>Exécution d'une méthode</h3>
+                                        <p class="">construction
+                                        de l'environnement de la requête</p>
+                                        <p class="">prise en charge
+                                        les middlewares activés</p>
+                                        <p class="">envoie de la requête</p>
+                                        <p class="">contrôle des codes
+                                        de retour de la réponse</p>
+                                </section>
+                                <section>
+                                    <h3>Exemple</h3>
+                                    <pre><code python>
+import spyre
 
->>> client = spyre.new_from_spec('redmine.json',
+client = spyre.new_from_spec('redmine.json',
                 base_url="https://my-redmine.mydomain.org")
->>> client.enable('auth.Basic', username="toto", password="tata")
+client.enable('auth.Basic', username="toto", password="tata")
 
->>> response = client.get_user(id='3', format='json')
->>> print reponse.base
-http://my-redmine.mydomain.org:443/users/3.json
->>> print response.status
-200
->>> my_user = response.content
->>> print my_user
+response = client.get_user(id='3', format='json')
+
+assert(reponse.base, "http://my-redmine.mydomain.org:443/users/3.json")
+assert(response.status, "200")
+
+my_user = response.content
+
+assert(my_user,
 '{"user":{"lastname":"Toto","login":"toto","firstname":"Toto",
 "mail":"toto@gmail.com","created_on":"2012/01/05 16:47:32 +0100",
 "last_login_on":"2012/09/06 18:27:26 +0200","id":3}}'
+)
                                     </code></pre>
                                 </section>
                                 <section>
-                                    <h4>L'environnement de la requête</h4>
+                                <h3>L'environnement de la requête</h3>
                                     <p class="">une structure de
                                     données (e.g. dictionnaire)</p>
-                                    <p class="">certaines clés, 
-                                    adoptées par WSGI (PEP 333),
-                                    Rack, PSGI et JSGI, sont requises par la
-                                    spécification SPORE</p> 
-                                    <p class="">d'autres sont définies
-                                    par la spécification elle-même</p>
+                                    <p class="">certaines clés -> WSGI (PEP333)</p> 
+                                    <p class="">d'autres -> définies par et pour SPORE</p>
                                     <p class="">modifiable durant
                                     l'éxecution par les middlewares</p>
                                     <p class="">utilisée pour
-                                    construire la requête finale à envoyer</p>
+                                    construire la requête finale</p>
                                 </section>
                                 <section>
-                                    <h4>L'environnment de la requête</h4>
-                                    <p>L'environnement de la requête pour
-                                    l'exemple précédent</p>
-                                    <pre><code>
+                                    <h3>Exemple</h3>
+                                    <pre><code python>
 {
     'spore.headers': [('Authorization', 'Basic dG90bzp0YXRh')],
     'HTTP_USER_AGENT': 'spyre', 
@@ -278,85 +377,41 @@ http://my-redmine.mydomain.org:443/users/3.json
                                     </code></pre>
                                 </section>
                                 <section>
-                                    <h4>Les middlewares</h4>
+                                    <h3>Les middlewares</h3>
                                         <p class="">modifier
-                                        l'environnement de la requête avant
-                                        envoi pour agir sur sa construction</p>
+                                        l'environnement de la requête</p>
                                         <p class="">activer un
-                                        callback qui sera appliqué sur la
-                                        réponse</p>
+                                        callback</p>
                                         <p class="">retourner
-                                        directement une réponse sans envoyer la
-                                        requête</p>
+                                        directement une réponse</p>
                                 </section>
+
                                 <section>
-                                <h4>Les middlewares</h4>
-                                <p>Activation d'un middleware de
-                                désérialisation
-                                du contenu de la réponse</p>
-                                <pre><code>
->>> import spyre
+                                <h3>Exemple</h3>
+                                <pre><code python>
+import spyre
 
->>> client = spyre.new_from_spec('redmine.json',
+client = spyre.new_from_spec('redmine.json',
                 base_url="https://my-redmine.mydomain.org")
->>> client.enable('auth.Basic', username="toto", password="tata")
->>> client.enable('format.Json')
+client.enable('auth.Basic', username="toto", password="tata")
+client.enable('format.Json')
 
->>> response = client.get_user(id='3', format='json')
->>> my_user = response.content
->>> print type(my_user)
-dict
->>> print my_user['user']['login']
-toto
+response = client.get_user(id='3', format='json')
+my_user = response.content
+
+assert(type(my_user, dict))
+assert(my_user['user']['login'], 'toto')
 
                                 </pre></code>
                                 </section>
                                 <section>
-                                <h3>Ecosystème SPORE</h3>
-                                <p>Des clients ont été implémentés et sont
-                                fonctionnels en:
-                                <ul>
-                                    <li class="fragment"><a
-                                        href="https://github.com/franckcuny/net-http-spore">Perl</a>
-                                        - Franck Cuny</li>
-                                        <li class=""><a href="">Lua</a>
-                                        - Franck Perrad</li>
-                                    <li class=""><a
-                                        href="https://github.com/sukria/Ruby-Spore">Ruby</a>
-                                    - Alexis Sukrieh</li>
-                                    <li class=""><a
-                                        href="https://github.com/fperrad/lua-Spore/">Clojure</a> - Niel Grünwald</li>
-                                    <li class=""><a
-                                        href="https://github.com/nikopol/jquery-spore">jQuery</a>
-                                    - Nikopol
-                                    <li class=""><a
-                                        href="https://github.com/francois2metz/node-spore">node.js</a>
-                                - François de Metz</li>
-                                <li class="">et même <a
-                                    href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
-                                </ul>
-                                </p>
-                                </section>
-                                <section>
-                                <h3>Et Python ?</h3>
-                                <img class="" src="img/meet_the_ring.jpg"/>
-                                </section>
-                                <section>
-                                <h3>Spyre</h3>
-                                <p class="">en cours de développement</p>
-                                <p class="">par Damien Leroux, Franck
-                                Cuny et moi-même</p>
-                                <p class="">dépôt officiel : https://github.com/blob/sypre<p>
-                                <p class="">mon fork: https://github.com/agrausem/spyre</p>
-                                </section>
-                                <section>
-                                <h3>Fonctionnalités</h3>
+                                <h3>Spyre - Fonctionnalités</h3>
                                 <p class="">méthodes GET et DELETE</p>
                                 <p class="">authentification Basic et via Header</p>
                                 <p class="">format JSON</p>
                                 </section>
                                 <section>
-                                <h3>Reste à faire</h3>
+                                <h3>Spyre - Reste à faire</h3>
                                 <p class="">autres formats (e.g. XML,
                                 etc)</p>
                                 <p class="">gestion du payload pour
@@ -368,7 +423,8 @@ toto
                                 </section>
                                 <section>
                                 <h3>Demain ?</h3>
-                                <img class="" src="img/gollum.jpg"/>
+                                <p>(Ré)spyre(r)</p>
+                                <img class="fragment" src="img/gollum.jpg"/>
                                 </section>
                                 <section>
                                 <h3>Merci !</h3>
