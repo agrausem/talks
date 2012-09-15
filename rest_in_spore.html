@@ -60,7 +60,7 @@
                                 <section>
                                 <h2>État des lieux</h2>
                                     <p>Système d'information hétérogène</p>
-                                    <p>API lourdes Java</p>
+                                    <p>API lourdes</p>
                                 </section>
                                 <section>
                                 <h2>Faits d'armes</h2>
@@ -114,7 +114,8 @@ def _BuildUrl(self, url, path_elements=None, extra_params=None):
                                     <h2>Linkfluence</h2>
                                     <p>http://fr.linkfluence.net</p>
                                     <p>Franck Cuny, Nils Grünwald</p>
-                                    <img src="img/mordor.jpg" width="650" height="500">
+                                    <img src="img/mordor.jpg" width="650"
+                                    height="450">
                                 </section>
 
                                 <section>
@@ -156,14 +157,23 @@ def _BuildUrl(self, url, path_elements=None, extra_params=None):
                                      <p>compréhensible</p>
                                      <p>se concentrer sur la logique du client</p>
                                      <p>gagner du temps</p>
-                                     <img class="fragment" src='img/karmeliet.jpg' height="380"/>
                                 </section>
 
                                 <section>
-                                <h3>Ecosystème</h3>
-                                <p>communauté grandissante</p>
+                                     <img class=""
+                                     src='img/karmeliet.jpg' height="600"/>
+                                </section>
+
+                                <section>
+                                <h3>Bonne parole</h3>
                                 <p>un prêcheur infatigable : Camille
                                 Maussang</p>
+                                <img src="img/frodon.jpg"</>
+                                </section>
+                                <section>
+                                <h3>Ecosystème</h3>
+                                <p>communauté grandissante</p>
+                                <img src="img/community.jpg">
                                 </section>
                                 <section>
                                 <h3>Implémentations</h3>
@@ -191,6 +201,7 @@ def _BuildUrl(self, url, path_elements=None, extra_params=None):
                                     - Bin Shu</li>
                                 <li class="">et même <a
                                     href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
+
                                 </ul>
                                 </section>
 
@@ -222,7 +233,8 @@ def _BuildUrl(self, url, path_elements=None, extra_params=None):
                                 <p class="">en cours de développement</p>
                                 <p class="">par Damien Leroux, Franck
                                 Cuny et moi-même</p>
-                                <p class="">dépôt officiel : https://github.com/blob/sypre<p>
+                                <p class="">dépôt officiel :
+                                https://github.com/blob/spyre<p>
                                 <p class="">mon fork: https://github.com/agrausem/spyre</p>
                                 </section>
 
@@ -237,68 +249,70 @@ def _BuildUrl(self, url, path_elements=None, extra_params=None):
                                 <section>
                                 <h3>Décrire un service Web - Généralités</h3>
                                 <pre><code class="javascript">
-
 {
-   "name" : "Redmine API",
-   "authority" : "GITHUB:Keen-github",
-   "base_url": "http://redmine.domain.fr",
-   "formats" : [
-      "json",
-      "xml"
-   ],
-   "version" : "0.1",
-   "meta" : {
-      "documentation" : "http://www.redmine.org/projects/redmine/wiki/Rest_api",
-      "authors" : "LogicEditor.com: Valeriy Skurikhin"
-   }
-   "methods" : {
-       ...
-   },
+    "name": "Middle Earth Web API",
+    "authority": "MORDOR:Sauron",
+    "version": "1.0",
+    "formats": [
+        "json"
+    ],
+    "meta": {
+        "author": "Arnaud Grausem",
+        "documentation": "http://api.mordor.org/dev/api"
+    }
+    "methods": {
+        ...
+    }
 }
+
                                 </code></pre>
                                 </section>
                                 <section>
                                     <h3>Décrire un service Web - Les méthodes</h3>
                                     <pre><code class="javascript">
-"methods": {
-     "get_user" : {
-         "path" : "/users/:id.:format", 
-         "required_params" : [
-            "id",
-            "format"
-         ],
-         "method" : "GET",
-         "authentication" : true
-    },
-    "list_users" : {
-         "path" : "/users.:format", 
-         "required_params" : [
-            "format"
-         ],
-         "optional_params" : [
-            "limit",
-            "offset"
-         ],
-         "method" : "GET",
-         "authentication" : true
-      },
-    ...
-},</code></pre>
+    "methods": {
+        "get_ring": {
+            "path": "/rings/:id.:format",
+            "required_params": [
+                "id",
+                "format"
+            ],
+            "optional_params": []
+            "method": "GET",
+            "authentication": true,
+            "expected_status": [200, 403]
+
+        },
+        "get_precious": {
+            "path": "/rings/9.:format",
+            "required_params": [
+                "format"
+            ],
+            "authentication": true,
+            "method": "GET",
+            "expected_status": [200, 403]
+        }
+    }
+</code></pre>
                                 </section>
                                 <section>
                                     <h3>Implémenter un client</h3>
                                     <p class="">construction
                                     d'un client Spore à partir d'une spécification</p>
-                                    <p class="">meta-programming</p>
+                                    <p class="">metaprogramming</p>
                                     <p class="">
                                     activation / désactivation de middlewares en
                                     cours d'exécution</p>
                                     <pre class="fragment"><code class="python">
 import spyre
 
-client = spyre.new_from_spec('redmine.json')
-client.enable('auth.Basic', username="toto", password="tata")
-                                    </pre></code>
+spec_filepath = '../server/lord_of_the_ring.json'
+
+frodon_client = spyre.new_from_spec(
+        spec_filepath,
+        base_url="http://localhost:5000")</pre></code>
+                                    <p class="fragment"><small><a
+                                            href="https://github.com/agrausem/mordor.git">github.com/agrausem/mordor</a></small></p>
                                 </section>
                                 <section>
                                     <h3>Appel de méthodes</h3>
@@ -325,22 +339,20 @@ client.enable('auth.Basic', username="toto", password="tata")
                                     <pre><code python>
 import spyre
 
-client = spyre.new_from_spec('redmine.json',
-                base_url="https://my-redmine.mydomain.org")
-client.enable('auth.Basic', username="toto", password="tata")
+spec_filepath = '../server/lord_of_the_ring.json'
 
-response = client.get_user(id='3', format='json')
+gollum_client = spyre.new_from_spec(
+        spec_filepath,
+        base_url="http://localhost:5000")
 
-assert(reponse.base, "http://my-redmine.mydomain.org:443/users/3.json")
-assert(response.status, "200")
-
-my_user = response.content
-
-assert(my_user,
-'{"user":{"lastname":"Toto","login":"toto","firstname":"Toto",
-"mail":"toto@gmail.com","created_on":"2012/01/05 16:47:32 +0100",
-"last_login_on":"2012/09/06 18:27:26 +0200","id":3}}'
-)
+while True:
+    try:
+        response = gollum_client.get_precious(format='json')
+        assert(response.status==403)
+        print 'I want my precious'
+    except (Exception, KeyboardInterrupt) as e:
+        print "\n\nYOU'RE SUCH A BAD GUY ! MY PRECIOUS ! HE'S MINE !"
+        break
                                     </code></pre>
                                 </section>
                                 <section>
@@ -358,23 +370,22 @@ assert(my_user,
                                     <h3>Exemple</h3>
                                     <pre><code python>
 {
-    'spore.headers': [('Authorization', 'Basic dG90bzp0YXRh')],
-    'HTTP_USER_AGENT': 'spyre', 
-    'SERVER_NAME': 'my-redmine.mydomain.org',
-    'spore.userinfo': None, 
-    'spore.authentication': True, 
-    'SCRIPT_NAME': ['', 'redmine'],
-    'spore.url_scheme': 'https',
-    'spore.formats': None,
-    'spore.payload': 'payload', 
-    'REQUEST_METHOD': u'GET',
-    'spore.expected_status': [],
-    'PATH_INFO': u'/users/:id.:format',
-    'SERVER_PORT': 443,
-    'spore.errors': '',
-    'QUERY_STRING': '',
-    'spore.params': ['id', '3', 'format', 'json'],
-    'REQUEST_URI': ''
+        'HTTP_USER_AGENT': 'spyre', 
+        'SERVER_NAME': 'localhost:5000', 
+        'spore.userinfo': None, 
+        'spore.authentication': True, 
+        'SCRIPT_NAME': [''], 
+        'spore.url_scheme': 'http', 
+        'spore.formats': None, 
+        'spore.payload': 'payload', 
+        'REQUEST_METHOD': u'GET', 
+        'spore.expected_status': [200, 403], 
+        'PATH_INFO': u'/rings/9.:format', 
+        'SERVER_PORT': 5000, 
+        'spore.errors': '', 
+        'QUERY_STRING': '', 
+        'spore.params': ['format', 'json'], 
+        'REQUEST_URI': ''
 }
                                     </code></pre>
                                 </section>
@@ -391,20 +402,52 @@ assert(my_user,
                                 <section>
                                 <h3>Exemple</h3>
                                 <pre><code python>
+
 import spyre
 
-client = spyre.new_from_spec('redmine.json',
-                base_url="https://my-redmine.mydomain.org")
-client.enable('auth.Basic', username="toto", password="tata")
-client.enable('format.Json')
+spec_filepath = '../server/lord_of_the_ring.json'
 
-response = client.get_user(id='3', format='json')
-my_user = response.content
+frodon_client = spyre.new_from_spec(
+        spec_filepath,
+        base_url="http://localhost:5000")
 
-assert(type(my_user, dict))
-assert(my_user['user']['login'], 'toto')
+frodon_client.enable('auth.Basic', username="frodon.sacquet",
+        password="i_m_secretly_in_love_with_my_friend_sam_gamegie")
+frodon_client.enable('format.Json')
 
-                                </pre></code>
+response = frodon_client.get_ring(id="9", format="json")
+assert(response.status==200)
+assert(response.base=='http://localhost:5000/rings/9.json')
+
+expect_content = {
+    "owner": "Dark Lord", 
+    "message": "One Ring to rule them all, One Ring to find them \
+One Ring to bring them all and in the darkness bind them", 
+    "id": 9}
+assert(response.content==expect_content)</pre></code>
+                                </section>
+                                <section>
+                                <h3>Exemple</h3>
+        <pre><code>
+{
+        'spore.headers': [('Authorization', 'Basic ZnJvZG9uLnNhY3F1ZXQ6aV9tX3NlY3JldGx5X2luX2xvdmVfd2l0aF9teV9mcmllbmRfc2FtX2dhbWVnaWU=')], 
+        'HTTP_USER_AGENT': 'spyre', 
+        'SERVER_NAME': 'localhost:5000', 
+        'spore.userinfo': None, 
+        'spore.authentication': True, 
+        'SCRIPT_NAME': [''], 
+        'spore.url_scheme': 'http', 
+        'spore.formats': None, 
+        'spore.payload': 'payload', 
+        'REQUEST_METHOD': u'GET', 
+        'spore.expected_status': [200, 403], 
+        'PATH_INFO': u'/rings/:id.:format', 
+        'SERVER_PORT': 5000, 
+        'spore.errors': '', 
+        'QUERY_STRING': '', 
+        'spore.params': ['id', '9', 'format', 'json'], 
+        'REQUEST_URI': ''
+}</code></pre>
                                 </section>
                                 <section>
                                 <h3>Spyre - Fonctionnalités</h3>
