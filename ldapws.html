@@ -15,7 +15,7 @@
                 <link rel='stylesheet' href='css/fonts.css'>
 		
 		<link rel="stylesheet" href="reveal.js/css/main.css">
-		<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
@@ -63,7 +63,7 @@
 				     <h2>Nos pratiques</h2>
 				     <p>LDAP en direct<p>
 				     <p>=</p>
-				     <p><bold>couplage le plus fort !</bold></p>
+				     <p><b>couplage le plus fort !</b></p>
                                 </section>
 
                                 <section>
@@ -76,376 +76,132 @@
 
                                 <section>
 				     <h2>Exemple : compte bloqué</h2>
-        			     <p>Avant : (&amp;(udsActive=TRUE)(udsPassword=))</p>
+        			     <p>Avant :</p>
+				     <p><b>(&amp;(udsActive=TRUE)(udsPassword=))</b></p>
                                 </section>
 
                                 <section>
                                     <h2>Exemple : compte bloqué</h2>
-        			    <p>Après : (udsLocked=TRUE)</li>
+        			    <p>Après :</p>
+				    <p><b>(udsLocked=TRUE)</b></p>
                                 </section>
 
                                 <section>
-                                    <h2>Exemple : compté bloqué</h2>
-				    <p>Consommateur n'a pas besoin de savoir cela</p>
-				    <p>Consommateur veut simplement les comptes bloqués</p>
+                                    <h2>Exemple : compte bloqué</h2>
+				    <p>Les attributs utilisés ne doivent pas être connus du consommateur</p>
+				    <p>Le consommateur doit pouvoir faire des opérations simples</p>
+                                </section>
+
+				<section>
+                                    <h2>Exemple : compte bloqué</h2>
+					<ul>
+					    <li>récupérer la liste des comptes bloqués</li>
+					    <li>tester si un compte est bloqué</li>
+					    <li>bloquer un compte</li>
+					</ul>
+				</section>
+
+                                <section>
+				    <h2>Abstraction</h2>
+				    <p>identifier et regrouper des caractéristiques et traitements communs applicables à des entités ou concepts variés</p>
                                 </section>
 
                                 <section>
-                                    <h3>Constat</h3>
-                                    <p class="">Implémentation systématique de la gestion :
-                                    <ul>
-                                        <li class="">des requêtes et des réponses HTTP</li>
-                                        <li class="">de l'authentification et des autorisations</li>
-                                        <li class="">des formats de réception des données</li>
-                                    </ul>
+				    <h2>Spécifier</h2>
+				    <p>s'affranchir du schéma LDAP</p>
+				    <p>définir une interface publique :
+					<ul>
+					     <li>simple</li>
+					     <li>explicite</li>
+					     <li>compréhensible</li>
+					     <li>extensible</li>
+					</ul>
+				    </p>
                                 </section>
+
+				<section>
+				    <h2>Étendre</h2>
+				    <p>spécification commune...</p>
+				    <p>... pour des source différentes</p>
+				</section>
+
+				<section>
+				    <h2>Exemple : le prénom d'une personne</h2>
+				    <p>LDAPUDS : <b>givenName</b></p>
+				    <p>APOGEE (étudiant): <b>LIB_PR1_IND</b></p>
+				    <p>APOGEE (personnel) : <b>LIB_PR1_PER</b></p>
+                                    <p>HARPEGE : <b>PRENOM</b></p>
+				    <p>...</p>
+				</section>
+
+				<section>
+				    <h2>Exemple : le prénom d'une personne</h2>
+				    <p>quelque soit la source de données, </p>
+				    <p>"le prénom" == person.first_name</p>
+				</section>
 
                                 <section>
-                                    <h3>Et pourtant... pour quel objectif ?</h3>
-                                    <p class="">Envoyer des données</p>
-                                    <p class="">Traiter des données receptionnées</p>
-                                    <br/>
+				    <h2>Service Web</h2>
+				    <p>programme informatique permettant la communication et l'échange de données entre applications et systèmes hétérogènes dans des environnements distribués</p>
                                 </section>
-
-                                <section>    
-                                    <h3>One specification to rule them all</h3>
-                                    <img src="img/ring.jpg">
-                                </section>
-
+	
                                 <section>
-                                    <h2>SPORE</h2>
-
-                                    <h3><a href="https://github.com/SPORE/specifications">Specification to a POrtable Rest Environment</a></h3>
-
-                                    <p class="">Décrire des API Web REST</p>
-                                    <p class="">Document texte simple et lisible : JSON</p>
-                                    <p class="">Implémentations spécifiques à
-                                    chaque langage</p>
+				    <h2>Approches</h2>
+				    <p>Modèle REST, reposant sur les standards HTTP et URI</p>
+				    <p>Protocole SOAP, reposant sur des services exécutables à distance</p>
                                 </section>
 
-                                <section>
-                                   <h2>But</h2>
-                                     <p>API cliente simple</p>
-                                     <p>compréhensible</p>
-                                     <p>se concentrer sur la logique du client</p>
-                                     <p>gagner du temps</p>
-                                </section>
+				<section>
+				    <h2>Avantages</h2>
+				    <p>librairie HTTP</p>
+				    <p>échange synchrone / temps réel</p>
+				    <p>formats de données standards</p>
+				    <p>couplage de niveau 2</p>
+				    <p>gestion des autorisations</p>
+				    <p>gestion des données exposées</p>
+				</section>
 
-                                <section>
-                                     <img class=""
-                                     src='img/karmeliet.jpg' height="600"/>
-                                </section>
+				<section>
+				    <h2>Demo !</h2>
+				    <p>en REST</p>
+				    <p>personne via login</p>
+				    <p>personne via nom et prénom</p>
+			        </section>
 
-                                <section>
-                                <h3>Bonne parole</h3>
-                                <p>un prêcheur infatigable : Camille
-                                Maussang</p>
-                                <img src="img/frodon.jpg"</>
-                                </section>
-                                <section>
-                                <h3>Ecosystème</h3>
-                                <p>communauté grandissante</p>
-                                <img src="img/community.jpg">
-                                </section>
-                                <section>
-                                <h3>Implémentations</h3>
-                                <p>Des clients ont été implémentés et sont
-                                fonctionnels en:</p>
-                                <ul>
-                                    <li class=""><a
-                                        href="https://github.com/franckcuny/net-http-spore">Perl</a>
-                                        - Franck Cuny</li>
-                                        <li class=""><a href="">Lua</a>
-                                        - Franck Perrad</li>
-                                    <li class=""><a
-                                        href="https://github.com/sukria/Ruby-Spore">Ruby</a>
-                                    - Alexis Sukrieh</li>
-                                    <li class=""><a
-                                        href="https://github.com/fperrad/lua-Spore/">Clojure</a> - Niel Grünwald</li>
-                                    <li class=""><a
-                                        href="https://github.com/nikopol/jquery-spore">jQuery</a>
-                                    - Nikopol
-                                    <li class=""><a
-                                        href="https://github.com/francois2metz/node-spore">node.js</a>
-                                - François de Metz</li>
-                                    <li><a
-                                    href="https://github.com/bins/PHP-Spore">PHP</a>
-                                    - Bin Shu</li>
-                                <li class="">et même <a
-                                    href="https://github.com/francois2metz/node-spore">Java !</a> - Nicolas Yzet</li>
+				<section>
+				    <h2>Débats & échanges</h2>
+				    <ul>
+					<li>quelles données exposer ?</li>
+					<li>comment gérer les autorisations ?</li>
+					<li>étendre à d'autres briques ?</li>
+				    </ul>
+				</section>
+	
+				<section>
+				    <h2>Exposition de données</h2>
+				    <ul>
+					<li>simplicité</li>
+					<li>chemin unique vers une ressource</li>
+				    </ul>
+				</section>
 
-                                </ul>
-                                </section>
+				<section>
+				    <h2>Autorisations</h2>
+				    <ul>
+					<li>applicatives</li>
+					<li>utilisateurs directs</li>
+					<li>gestion des données (filtres) / consommateur</li>
+					<li>nombre de requêtes (throttle)</li>
+				    </ul>
+				</section>
 
-                                <section data-state="image-blocker">
-                                <h3>Descriptions</h3>
-                                <p>https://github.com/SPORE/api-description</p>
-                                <img id="map0" src="img/map.jpg" width="650"
-                                height="500"/>
-                                <img id="map1" class="fragment"
-                                src="img/map1.jpg" width=650" height="500"/>
-                                <img id="map2" class="fragment"
-                                src="img/map2.jpg" width=650" height="500"/>
-                                </section>
-
-                                <section>
-                                <h3>Acmeism</h3>
-                                <p>une description à jour</p>
-                                <p>tous les clients à jour</p>
-                                <p>pour tous les langages</p>
-                                </section>
-
-                                <section>
-                                <h3>Et Python ?</h3>
-                                <img class="fragment" src="img/meet_the_ring.jpg"/>
-                                </section>
-
-                                <section>
-                                <h3>Spyre</h3>
-                                <p class="">en cours de développement</p>
-                                <p class="">par Damien Leroux, Franck
-                                Cuny et moi-même</p>
-                                <p class="">dépôt officiel :
-                                https://github.com/blob/spyre<p>
-                                <p class="">mon fork: https://github.com/agrausem/spyre</p>
-                                </section>
-
-                                <section>
-                                <h2>La spécification</h2>
-                                <p class="">décrire un service
-                                REST</p>
-                                <p class="">implémenter un
-                                client</p>
-                                <p class=""></p>définir et implémenter des middlewares
-                                </section>
-                                <section>
-                                <h3>Décrire un service Web - Généralités</h3>
-                                <pre><code class="javascript">
-{
-    "name": "Middle Earth Web API",
-    "authority": "MORDOR:Sauron",
-    "version": "1.0",
-    "formats": [
-        "json"
-    ],
-    "meta": {
-        "author": "Arnaud Grausem",
-        "documentation": "http://api.mordor.org/dev/api"
-    }
-    "methods": {
-        ...
-    }
-}
-
-                                </code></pre>
-                                </section>
-                                <section>
-                                    <h3>Décrire un service Web - Les méthodes</h3>
-                                    <pre><code class="javascript">
-    "methods": {
-        "get_ring": {
-            "path": "/rings/:id.:format",
-            "required_params": [
-                "id",
-                "format"
-            ],
-            "optional_params": []
-            "method": "GET",
-            "authentication": true,
-            "expected_status": [200, 403]
-
-        },
-        "get_precious": {
-            "path": "/rings/9.:format",
-            "required_params": [
-                "format"
-            ],
-            "authentication": true,
-            "method": "GET",
-            "expected_status": [200, 403]
-        }
-    }
-</code></pre>
-                                </section>
-                                <section>
-                                    <h3>Implémenter un client</h3>
-                                    <p class="">construction
-                                    d'un client Spore à partir d'une spécification</p>
-                                    <p class="">metaprogramming</p>
-                                    <p class="">
-                                    activation / désactivation de middlewares en
-                                    cours d'exécution</p>
-                                    <pre class="fragment"><code class="python">
-import spyre
-
-spec_filepath = '../server/lord_of_the_ring.json'
-
-frodon_client = spyre.new_from_spec(
-        spec_filepath,
-        base_url="http://localhost:5000")</pre></code>
-                                    <p class="fragment"><small><a
-                                            href="https://github.com/agrausem/mordor.git">github.com/agrausem/mordor</a></small></p>
-                                </section>
-                                <section>
-                                    <h3>Appel de méthodes</h3>
-                                        <p>depuis l'objet client généré</p>
-                                        <p class="">des arguments
-                                        obligatoires</li>
-                                        <p class="">des
-                                        arguments optionnels</li>
-                                </section>
-                                <section>
-                                   <h3>Exécution d'une méthode</h3>
-                                        <p class="">construction
-                                        de l'environnement de la requête</p>
-                                        <p class="">prise en charge
-                                        des middlewares activés</p>
-                                        <p class="">construction de la
-                                        requête</p>
-                                        <p class="">envoi de la requête</p>
-                                        <p class="">contrôle des codes
-                                        de retour de la réponse</p>
-                                </section>
-                                <section>
-                                    <h3>Exemple</h3>
-                                    <pre><code python>
-import spyre
-
-spec_filepath = '../server/lord_of_the_ring.json'
-
-gollum_client = spyre.new_from_spec(
-        spec_filepath,
-        base_url="http://localhost:5000")
-
-while True:
-    try:
-        response = gollum_client.get_precious(format='json')
-        assert(response.status==403)
-        print 'I want my precious'
-    except (Exception, KeyboardInterrupt) as e:
-        print "\n\nYOU'RE SUCH A BAD GUY ! MY PRECIOUS ! HE'S MINE !"
-        break
-                                    </code></pre>
-                                </section>
-                                <section>
-                                <h3>L'environnement de la requête</h3>
-                                    <p class="">une structure de
-                                    données (e.g. dictionnaire)</p>
-                                    <p class="">certaines clés -> WSGI (PEP333)</p> 
-                                    <p class="">d'autres -> définies par et pour SPORE</p>
-                                    <p class="">modifiable durant
-                                    l'éxecution par les middlewares</p>
-                                    <p class="">utilisée pour
-                                    construire la requête finale</p>
-                                </section>
-                                <section>
-                                    <h3>Exemple</h3>
-                                    <pre><code python>
-{
-        'HTTP_USER_AGENT': 'spyre', 
-        'SERVER_NAME': 'localhost:5000', 
-        'spore.userinfo': None, 
-        'spore.authentication': True, 
-        'SCRIPT_NAME': [''], 
-        'spore.url_scheme': 'http', 
-        'spore.formats': None, 
-        'spore.payload': 'payload', 
-        'REQUEST_METHOD': u'GET', 
-        'spore.expected_status': [200, 403], 
-        'PATH_INFO': u'/rings/9.:format', 
-        'SERVER_PORT': 5000, 
-        'spore.errors': '', 
-        'QUERY_STRING': '', 
-        'spore.params': ['format', 'json'], 
-        'REQUEST_URI': ''
-}
-                                    </code></pre>
-                                </section>
-                                <section>
-                                    <h3>Les middlewares</h3>
-                                        <p class="">modifier
-                                        l'environnement de la requête</p>
-                                        <p class="">activer un
-                                        callback</p>
-                                        <p class="">retourner
-                                        directement une réponse</p>
-                                </section>
-
-                                <section>
-                                <h3>Exemple</h3>
-                                <pre><code python>
-
-import spyre
-
-spec_filepath = '../server/lord_of_the_ring.json'
-
-frodon_client = spyre.new_from_spec(
-        spec_filepath,
-        base_url="http://localhost:5000")
-
-frodon_client.enable('auth.Basic', username="frodon.sacquet",
-        password="i_m_secretly_in_love_with_my_friend_sam_gamegie")
-frodon_client.enable('format.Json')
-
-response = frodon_client.get_ring(id="9", format="json")
-assert(response.status==200)
-assert(response.base=='http://localhost:5000/rings/9.json')
-
-expect_content = {
-    "owner": "Dark Lord", 
-    "message": "One Ring to rule them all, One Ring to find them \
-One Ring to bring them all and in the darkness bind them", 
-    "id": 9}
-assert(response.content==expect_content)</pre></code>
-                                </section>
-                                <section>
-                                <h3>Exemple</h3>
-        <pre><code>
-{
-        'spore.headers': [('Authorization', 'Basic ZnJvZG9uLnNhY3F1ZXQ6aV9tX3NlY3JldGx5X2luX2xvdmVfd2l0aF9teV9mcmllbmRfc2FtX2dhbWVnaWU=')], 
-        'HTTP_USER_AGENT': 'spyre', 
-        'SERVER_NAME': 'localhost:5000', 
-        'spore.userinfo': None, 
-        'spore.authentication': True, 
-        'SCRIPT_NAME': [''], 
-        'spore.url_scheme': 'http', 
-        'spore.formats': None, 
-        'spore.payload': 'payload', 
-        'REQUEST_METHOD': u'GET', 
-        'spore.expected_status': [200, 403], 
-        'PATH_INFO': u'/rings/:id.:format', 
-        'SERVER_PORT': 5000, 
-        'spore.errors': '', 
-        'QUERY_STRING': '', 
-        'spore.params': ['id', '9', 'format', 'json'], 
-        'REQUEST_URI': ''
-}</code></pre>
-                                </section>
-                                <section>
-                                <h3>Spyre - Fonctionnalités</h3>
-                                <p class="">méthodes GET et DELETE</p>
-                                <p class="">authentification Basic et via Header</p>
-                                <p class="">format JSON</p>
-                                </section>
-                                <section>
-                                <h3>Spyre - Reste à faire</h3>
-                                <p class="">autres formats (e.g. XML,
-                                etc)</p>
-                                <p class="">gestion du payload pour
-                                POST et PUT</p>
-                                <p class="">oauth</p>
-                                <p class="">ménage !</p>
-                                </section>
-                                <section>
-                                <h3>Demain ?</h3>
-                                <p>(Re)spyre(r)</p>
-                                <img class="fragment" src="img/gollum.jpg"/>
-                                </section>
-                                <section>
-                                <h3>Merci !</h3>
-                                <img class="fragment" src="img/sauron.jpg"
-                                width="650" height="500">
-                                </section>
+				<section>
+				    <h2>Autres briques</h2>
+				    <ul>
+					<li>Harpège</li>
+					<li>Apogée</li>
+					<li>...</li>
+				    </ul>
 			</div>
 
 			<!-- The navigational controls UI
@@ -473,8 +229,8 @@ assert(response.content==expect_content)</pre></code>
 				progress: true,
 				history: true,
 				
-				theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/linear(2d)
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
